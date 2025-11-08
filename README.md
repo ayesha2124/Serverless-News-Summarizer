@@ -60,30 +60,32 @@ cd Serverless-News-Summarizer
 ```
 2. **Set Environment Variables**
 
-HF_API_KEY → HuggingFace API key
-
-DYNAMO_TABLE → DynamoDB table name (news_summary_cache)
+   - HF_API_KEY → HuggingFace API key
+      
+   - DYNAMO_TABLE → DynamoDB table name (news_summary_cache)
 
 3. **Deploy Lambda Function**
+  
+   - Zip and upload lambda_function.py or deploy using AWS SAM/CloudFormation
+  
+   - Configure API Gateway POST /summarize endpoint
+  
+   - Enable CORS for frontend
    
-Zip and upload lambda_function.py or deploy using AWS SAM/CloudFormation
-
-Configure API Gateway POST /summarize endpoint
-
-Enable CORS for frontend
-
 4. **Configure DynamoDB**
    
-Create table news_summary_cache
-
-Partition key: url_hash (String)
+   - Enable CORS for frontend
+  
+   - Create table news_summary_cache
+  
+   - Partition key: url_hash (String)
 
 5. **Deploy Web Dashboard**
    
-Upload index.html to AWS S3 bucket configured for static website hosting
-
-Access public dashboard using the bucket endpoint
-
+   - Upload index.html to AWS S3 bucket configured for static website hosting
+  
+   - Access public dashboard using the bucket endpoint
+   
 6. **Test Locally**
 
 ```bash
@@ -109,20 +111,24 @@ NEWS-SUMMARIZER/
 ---
 
 ## Workflow
-1 Feature	Purpose
-2 Lambda Function	Handles incoming requests, fetches article, and calls summarization API
-3 API Gateway	Provides RESTful endpoint for the frontend and external clients
-4 DynamoDB Caching	Stores summaries of URLs to avoid repeated API calls
-5 S3 Static Website	Hosts web dashboard for user-friendly interaction
-6 HuggingFace API	Performs NLP-based summarization
+
+- **Feature:** Purpose  
+- **Lambda Function:** Handles incoming requests, fetches articles, and calls the summarization API.  
+- **API Gateway:** Provides a RESTful endpoint for the frontend and external clients.  
+- **DynamoDB Caching:** Stores summaries of URLs to avoid repeated API calls.  
+- **S3 Static Website:** Hosts the web dashboard for user-friendly interaction.  
+- **HuggingFace API:** Performs NLP-based summarization.
+
 
 ---
 
 ## Reflection
-Learned AWS Lambda integration with API Gateway
 
-Managed DynamoDB caching for serverless functions
+   - Learned AWS Lambda integration with API Gateway
+  
+   - Managed DynamoDB caching for serverless functions
+  
+   - Solved CORS issues for frontend-backend communication
 
-Solved CORS issues for frontend-backend communication
+   - Implemented a full end-to-end serverless deployment
 
-Implemented a full end-to-end serverless deployment
